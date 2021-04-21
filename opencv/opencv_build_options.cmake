@@ -6,7 +6,7 @@
 
 # Initial cache values for an optimized OpenCV 3.3.1 release build
 
-set (BUILD_CUDA_STUBS          OFF CACHE BOOL "")
+set (BUILD_CUDA_STUBS          ON CACHE BOOL "")
 set (BUILD_DOCS                OFF CACHE BOOL "")
 set (BUILD_EXAMPLES            OFF CACHE BOOL "")
 set (BUILD_IPP_IW              OFF CACHE BOOL "")

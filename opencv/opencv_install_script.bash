@@ -16,7 +16,7 @@ error () {
 	exit 1
 }
 
-OPENCV_VERSION='3.3.1'
+OPENCV_VERSION='4.5.2'
 CUDA_INCLUDE_DIR='/usr/local/cuda/include'
 SCRIPT_DIR="$(pwd)"
 
@@ -44,7 +44,9 @@ fi
 if (
 	info "Downloading OpenCV version ${OPENCV_VERSION}" &&
 	wget -O opencv-${OPENCV_VERSION}.zip https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip --progress=dot &&
-	unzip -q opencv-${OPENCV_VERSION}.zip
+	unzip -q opencv-${OPENCV_VERSION}.zip &&
+	wget -O opencv_contrib-${OPENCV_VERSION}.zip https://github.com/opencv/opencv_contrib/archive/4.5.2.zip --progress=dot &&
+	unzip -q opencv_contrib-${OPENCV_VERSION}.zip
 )
 then
 	info "Downloading and extracting OpenCV succeeded."
@@ -72,7 +74,7 @@ if (
 	cd opencv-${OPENCV_VERSION} &&
 	mkdir -p build &&
 	cd build &&
-	cmake -C ${SCRIPT_DIR}/opencv_build_options.cmake .. &&
+	cmake -C ${SCRIPT_DIR}/opencv_build_options.cmake -D WITH_CUDA=ON -D OPENCV_EXTRA_MODULES_PATH=~/Desktop/opencv_contrib-4.5.2/modules -D BUILD_opencv_python3=ON -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2 -D CUDA_ARCH_BIN=7.2 -D CUDA_ARCH_PTX="" .. &&
 	make -j4 && # An higher value of -j may speed-up the process a little
 	sudo make install
 )
