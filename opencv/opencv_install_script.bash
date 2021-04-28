@@ -74,7 +74,7 @@ if (
 	cd opencv-${OPENCV_VERSION} &&
 	mkdir -p build &&
 	cd build &&
-	cmake -C ${SCRIPT_DIR}/opencv_build_options.cmake -D WITH_CUDA=ON -D OPENCV_EXTRA_MODULES_PATH=~/Desktop/opencv_contrib-4.5.2/modules -D BUILD_opencv_python3=ON -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2 -D CUDA_ARCH_BIN=7.2 -D CUDA_ARCH_PTX="" .. &&
+	cmake -C ${SCRIPT_DIR}/opencv_build_options.cmake -D WITH_CUDA=ON -D OPENCV_EXTRA_MODULES_PATH=${SCRIPT_DIR}/opencv_contrib-4.5.2/modules -D BUILD_opencv_python3=ON -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-10.2 -D CUDA_ARCH_BIN=7.2 -D CUDA_ARCH_PTX="" .. &&
 	make -j4 && # An higher value of -j may speed-up the process a little
 	sudo make install
 )
